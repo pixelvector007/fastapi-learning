@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PatientCare – Patient Management System</title>
+<meta name="description" content="A FastAPI-powered patient management system with automatic BMI and health verdicts.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/common.js"></script>
+</head>
+<body>
+<header class="nav"><div class="container"><a class="brand" href="index.html"><span class="logo">+</span> PatientCare</a><nav><a href="index.html#features">Features</a><a href="index.html#api">API</a><a href="index.html#bmi">BMI Calculator</a><a href="dashboard.html" class="keep">Dashboard</a></nav><button class="iconbtn" id="themeBtn" aria-label="Toggle theme"></button></div></header>
+<section class="hero">
+  <div class="container">
+    <div>
+      <span class="eyebrow">Patient Management System</span>
+      <h1>Patient records and <em>health insights</em>, simplified.</h1>
+      <p>A fast, clean patient management system built on FastAPI and Pydantic. Create, search, sort and update records, with BMI and a health verdict computed automatically.</p>
+      <a class="btn primary lg" href="dashboard.html">Open dashboard</a>
+      <a class="btn lg" href="#api">Explore the API</a>
+    </div>
+    <div class="hero-card">
+      <h3>Live snapshot</h3>
+      <div class="hc-row"><span>Patients on record</span><b id="liveCount">7</b></div>
+      <div class="hc-row"><span>Average BMI</span><b id="liveAvg">27.5</b></div>
+      <div class="hc-row"><span>API version</span><b>1.0.0</b></div>
+      <div class="hc-row"><span>Auto docs</span><b>/docs</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="sec-head"><span class="tag">Features</span><h2>Everything you need to manage patients</h2><p>Simple, validated and fast.</p></div>
+    <div class="grid3">
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 4h6v3H9z"/><path d="M15 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h4"/></svg></div><h3>Full CRUD</h3><p>Create, view, edit and delete patient records from the dashboard.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></div><h3>Automatic BMI</h3><p>BMI and an Underweight / Normal / Overweight / Obese verdict are computed from height and weight.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>Search &amp; sort</h3><p>Find patients by name, city or ID, filter by verdict and sort by age, height, weight or BMI.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Validated data</h3><p>Pydantic models enforce limits on names, ages, heights and weights before anything is saved.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>At-a-glance stats</h3><p>Totals, average BMI and a verdict distribution bar update instantly as records change.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></div><h3>Light &amp; dark</h3><p>A responsive interface that works on phones and desktops, in your preferred theme.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="api" class="alt">
+  <div class="container">
+    <div class="sec-head"><span class="tag">Developers</span><h2>A clean REST API</h2><p>Interactive documentation is available at <code>/docs</code> when the server is running.</p></div>
+    <div class="eps">
+      <div class="ep"><span class="m GET">GET</span><code>/view</code><span class="d">List all patients</span></div>
+      <div class="ep"><span class="m GET">GET</span><code>/sort?sort_by=bmi&amp;order=desc</code><span class="d">Sort by height, weight or BMI</span></div>
+      <div class="ep"><span class="m GET">GET</span><code>/patient/{patient_id}</code><span class="d">Get one patient</span></div>
+      <div class="ep"><span class="m POST">POST</span><code>/create</code><span class="d">Add a patient</span></div>
+      <div class="ep"><span class="m PUT">PUT</span><code>/edit/{patient_id}</code><span class="d">Update fields</span></div>
+      <div class="ep"><span class="m DELETE">DELETE</span><code>/delete/{patient_id}</code><span class="d">Remove a patient</span></div>
+      <div class="ep"><span class="m GET">GET</span><code>/health</code><span class="d">Service health check</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="bmi">
+  <div class="container">
+    <div class="sec-head"><span class="tag">Try it</span><h2>BMI calculator</h2><p>The same formula and categories the API uses.</p></div>
+    <div class="card calc">
+      <div class="row">
+        <label>Height (m)<input id="cH" type="number" step="0.01" min="0.3" value="1.70"></label>
+        <label>Weight (kg)<input id="cW" type="number" step="0.1" min="1" value="68"></label>
+      </div>
+      <div class="result" id="res"></div>
+      <div class="scale"><i style="background:var(--under)"></i><i style="background:var(--normal)"></i><i style="background:var(--over)"></i><i style="background:var(--obese)"></i></div>
+      <small style="color:var(--muted)">Under 18.5 · 18.5–24.9 · 25–29.9 · 30 and above</small>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <div class="sec-head"><span class="tag">Stack</span><h2>Built with</h2></div>
+    <div class="tech"><span class="chip">FastAPI</span><span class="chip">Pydantic v2</span><span class="chip">Uvicorn</span><span class="chip">JSON storage</span><span class="chip">HTML · CSS · JavaScript</span></div>
+  </div>
+</section>
+
+<footer><div class="container"><div class="fgrid"><div><a class="brand" href="index.html" style="color:#fff;padding:0"><span class="logo">+</span> PatientCare</a><p>A fast, validated patient management system with automatic BMI and health verdicts, powered by FastAPI.</p></div><div><h4>Product</h4><a href="index.html#features">Features</a><a href="dashboard.html">Dashboard</a><a href="index.html#bmi">BMI Calculator</a></div><div><h4>Developers</h4><a href="index.html#api">API endpoints</a><a href="/docs">Swagger docs</a><a href="/redoc">ReDoc</a></div></div><div class="fbot">© <span id="year"></span> PatientCare. All rights reserved.</div></div></footer>
+<script src="js/landing.js"></script>
+</body>
+</html>

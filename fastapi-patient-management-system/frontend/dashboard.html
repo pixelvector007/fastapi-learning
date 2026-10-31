@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard – PatientCare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/common.js"></script>
+</head>
+<body>
+<header class="nav"><div class="container"><a class="brand" href="index.html"><span class="logo">+</span> PatientCare</a><nav><a href="index.html#features">Features</a><a href="index.html#api">API</a><a href="index.html#bmi">BMI Calculator</a><a href="dashboard.html" class="keep active">Dashboard</a></nav><button class="iconbtn" id="themeBtn" aria-label="Toggle theme"></button></div></header>
+<main class="container page">
+  <div class="page-head">
+    <h1>Patients</h1>
+    <span class="pill" id="mode"><span class="dot"></span><span id="modeText">Connecting…</span></span>
+    <div class="sp"></div>
+    <button class="btn" id="exportBtn">Export CSV</button>
+    <button class="btn primary" id="addBtn">+ New patient</button>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="bar" id="bar"></div>
+  <div class="tools">
+    <input type="search" id="q" placeholder="Search name, city or ID…">
+    <select id="sortBy"><option value="id">Sort: ID</option><option value="name">Sort: Name</option><option value="age">Sort: Age</option><option value="height">Sort: Height</option><option value="weight">Sort: Weight</option><option value="bmi">Sort: BMI</option></select>
+    <select id="order"><option value="asc">Ascending</option><option value="desc">Descending</option></select>
+    <select id="filter"><option value="">All verdicts</option><option>Underweight</option><option>Normal</option><option>Overweight</option><option>Obese</option></select>
+  </div>
+  <div class="tablebox"><table>
+    <thead><tr><th>ID</th><th>Name</th><th>City</th><th>Age</th><th>Gender</th><th>Height</th><th>Weight</th><th>BMI</th><th>Verdict</th><th></th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+</main>
+
+<dialog id="dlg">
+  <form id="f" method="dialog" novalidate>
+    <h2 id="dTitle">New patient</h2>
+    <label>ID<input id="fId" placeholder="P008"></label>
+    <label>Name<input id="fName" maxlength="25"></label>
+    <label>City<input id="fCity" maxlength="25"></label>
+    <label>Age<input id="fAge" type="number" min="1" max="119"></label>
+    <label>Gender<select id="fGender"><option value="male">Male</option><option value="female">Female</option><option value="others">Others</option></select></label>
+    <label>Height (m)<input id="fH" type="number" step="0.01" min="0.3"></label>
+    <label class="full">Weight (kg)<input id="fW" type="number" step="0.1" min="1"></label>
+    <div class="prev" id="prev"></div>
+    <div class="err" id="err"></div>
+    <div class="fa"><button type="button" class="btn" id="cancel">Cancel</button><button type="submit" class="btn primary">Save</button></div>
+  </form>
+</dialog>
+<div class="toast" id="toast"></div>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
