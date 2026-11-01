@@ -1,387 +1,250 @@
-</head><body>
-<div align="center">
-<h1>🏥 PatientCare — Patient Management System</h1>
-<p><strong>A FastAPI REST service with a responsive web dashboard that manages patient records and computes BMI and health verdicts automatically.</strong></p>
-<p><img src="https://img.shields.io/badge/Python-3.10%2B-3B8F7B?style=for-the-badge&amp;logo=python&amp;logoColor=white" alt="Python">
-<img src="https://img.shields.io/badge/FastAPI-0.161-3B8F7B?style=for-the-badge&amp;logo=fastapi&amp;logoColor=white" alt="FastAPI">
-<img src="https://img.shields.io/badge/Pydantic-v2-3B8F7B?style=for-the-badge" alt="Pydantic">
-<img src="https://img.shields.io/badge/HTML%20%7C%20CSS%20%7C%20JS-0F1F16?style=for-the-badge&amp;logoColor=A7F432" alt="Frontend"></p>
-</div>
-<hr>
-<h2>🎯 Project Overview</h2>
-<p>PatientCare is a patient management system built around a validated REST API. It lets you <strong>create, view, edit, delete and sort</strong> patient records, and it derives <strong>BMI</strong> and a <strong>health verdict</strong> from each patient's height and weight, so those values can never go out of sync.</p>
-<p>The same FastAPI app also serves a landing page and an interactive dashboard, so one command runs the whole product.</p>
-<hr>
-<h2>📌 Key Features</h2>
-<ul>
-<li>✅ Full CRUD for patient records with unique IDs</li>
-<li>⚖️ BMI and verdict as Pydantic <strong>computed fields</strong></li>
-<li>🛡️ Strict validation (types, length limits, value ranges)</li>
-<li>🔃 Sorting by height, weight or BMI (ascending or descending)</li>
-<li>📊 Dashboard with live stats, verdict distribution bar, search, filter and CSV export</li>
-<li>🌗 Light and dark themes, fully responsive</li>
-<li>💾 Demo mode: the dashboard still works without the server, using sample data</li>
-<li>📖 Auto-generated API docs at <code>/docs</code> and <code>/redoc</code></li>
-<li>🐳 Dockerfile included</li>
-</ul>
-<hr>
-<h2>📂 Project Structure</h2>
-<pre><code>patient-management-website/
-├── main.py                  # App entry point, /health, static site mount
-├── patients.json            # JSON data store
-├── requirements.txt         # Pinned dependencies
-├── Dockerfile               # Container image
+# 🏥 PatientCare — Patient Management System
+
+A full-stack patient management application built using **FastAPI, Pydantic, HTML, CSS, and JavaScript**.
+
+PatientCare provides a REST API and a web-based dashboard to manage patient records, calculate BMI, and explore backend development concepts through a practical application.
+
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063)
+![HTML5](https://img.shields.io/badge/HTML5-Frontend-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-Frontend-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?logo=javascript&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-Supported-2496ED?logo=docker&logoColor=white)
+
+---
+
+## 📌 About the Project
+
+**PatientCare** is a patient management system developed to explore backend development using FastAPI and the integration of REST APIs with a web-based frontend.
+
+The application allows users to manage patient records, view patient information, and calculate BMI-based health categories.
+
+It also includes a responsive dashboard with features such as search, filtering, sorting, statistics, and CSV export.
+
+The project combines a Python backend with a browser-based frontend to demonstrate how APIs can power a practical web application.
+
+---
+
+## ✨ Features
+
+### 🩺 Patient Management
+
+- Create new patient records
+- View individual patient details
+- Update existing patient information
+- Delete patient records
+- Store patient data using JSON-based persistence
+
+### 📊 BMI Calculation
+
+- Automatically calculate BMI using height and weight
+- Generate BMI-based health verdicts
+- Include calculated values in patient responses
+
+### 🌐 Web Dashboard
+
+- Responsive patient management dashboard
+- Search and filter patient records
+- Sort patient data
+- View dashboard statistics
+- Export patient data to CSV
+- Light and dark themes
+- Demo mode for exploring the interface
+
+### ⚙️ API Features
+
+- RESTful API endpoints
+- Request validation using Pydantic
+- Interactive API documentation
+- Modular application structure
+- Docker support
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Python | Backend development |
+| FastAPI | REST API framework |
+| Pydantic v2 | Data validation and models |
+| HTML5 | Frontend structure |
+| CSS3 | Styling and responsive layout |
+| JavaScript | Frontend interactions and API integration |
+| JSON | Data persistence |
+| Docker | Application containerization |
+| AI Tools | Assistance with frontend development |
+
+---
+
+## 📂 Project Structure
+
+```text
+PatientCare/
+│
+├── main.py
+├── patients.json
+├── requirements.txt
+├── Dockerfile
+│
 ├── models/
-│   └── patient.py           # Patient / PatientUpdate schemas + BMI logic
+│   └── patient.py
+│
 ├── routers/
-│   └── patient.py           # CRUD + sort endpoints
+│   └── patient.py
+│
 ├── dependencies/
-│   └── patient.py           # Shared dependencies
+│   └── patient.py
+│
 ├── utils/
-│   └── database.py          # JSON load/save helpers
+│   └── database.py
+│
 └── website/
-    ├── index.html           # Landing page
-    ├── dashboard.html       # Patient dashboard
-    ├── css/style.css        # Styles and themes
-    └── js/                  # common.js, landing.js, dashboard.js
-</code></pre>
-<hr>
-<h2>⚙️ Technologies Used</h2>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Layer</th>
-<th>Technology</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>🐍 Backend</td>
-<td>Python, FastAPI, Uvicorn</td>
-</tr>
-<tr>
-<td>✔️ Validation</td>
-<td>Pydantic v2</td>
-</tr>
-<tr>
-<td>🗄️ Storage</td>
-<td>JSON file</td>
-</tr>
-<tr>
-<td>🎨 Frontend</td>
-<td>HTML5, CSS3, vanilla JavaScript</td>
-</tr>
-<tr>
-<td>🐳 Packaging</td>
-<td>Docker</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-<h2>🔍 Methodology / Workflow</h2>
-<pre><code> Browser (HTML / CSS / JS)
-        │  fetch()
-        ▼
- ┌──────────────────────────────┐
- │  FastAPI  (main.py)          │
- │   ├─ /site     website       │
- │   ├─ /health   status check  │
- │   └─ routers/patient.py ─────┼──► models/patient.py  (validate + BMI)
- └──────────────┬───────────────┘
-                ▼
-       utils/database.py ──► patients.json
-</code></pre>
-<ol>
-<li>The client sends JSON to an endpoint.</li>
-<li>Pydantic validates the payload (<code>422</code> on failure).</li>
-<li>BMI and verdict are computed from height and weight.</li>
-<li>The record is written to <code>patients.json</code> and a response is returned.</li>
-<li>The dashboard probes <code>/health</code> on load: if the API answers it works live, otherwise it falls back to demo mode.</li>
-</ol>
-<h3>🧮 BMI logic</h3>
-<pre><code class="language-python">bmi = round(weight / (height ** 2), 2)
-</code></pre>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>BMI</th>
-<th>Verdict</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>below 18.5</td>
-<td>Underweight</td>
-</tr>
-<tr>
-<td>18.5 to 24.9</td>
-<td>Normal</td>
-</tr>
-<tr>
-<td>25 to 29.9</td>
-<td>Overweight</td>
-</tr>
-<tr>
-<td>30 and above</td>
-<td>Obese</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3>🔌 API Endpoints</h3>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Endpoint</th>
-<th>Description</th>
-<th>Success</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>GET</code></td>
-<td><code>/health</code></td>
-<td>Service health check</td>
-<td><code>200</code></td>
-</tr>
-<tr>
-<td><code>GET</code></td>
-<td><code>/view</code></td>
-<td>All patients, keyed by ID</td>
-<td><code>200</code></td>
-</tr>
-<tr>
-<td><code>GET</code></td>
-<td><code>/sort?sort_by=bmi&amp;order=desc</code></td>
-<td>Sorted list (<code>height</code>, <code>weight</code>, <code>bmi</code>)</td>
-<td><code>200</code></td>
-</tr>
-<tr>
-<td><code>GET</code></td>
-<td><code>/patient/{patient_id}</code></td>
-<td>Single patient</td>
-<td><code>200</code></td>
-</tr>
-<tr>
-<td><code>POST</code></td>
-<td><code>/create</code></td>
-<td>Create a patient</td>
-<td><code>201</code></td>
-</tr>
-<tr>
-<td><code>PUT</code></td>
-<td><code>/edit/{patient_id}</code></td>
-<td>Partial update</td>
-<td><code>200</code></td>
-</tr>
-<tr>
-<td><code>DELETE</code></td>
-<td><code>/delete/{patient_id}</code></td>
-<td>Delete a patient</td>
-<td><code>200</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Errors: <code>400</code> invalid sort field/order or duplicate ID · <code>404</code> not found · <code>422</code> validation error.</p>
-<h3>🧾 Data model</h3>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Rules</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>id</code></td>
-<td>string</td>
-<td>required, unique</td>
-</tr>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>required, max 25 chars</td>
-</tr>
-<tr>
-<td><code>city</code></td>
-<td>string</td>
-<td>required, max 25 chars</td>
-</tr>
-<tr>
-<td><code>age</code></td>
-<td>int</td>
-<td>greater than 0, less than 120</td>
-</tr>
-<tr>
-<td><code>gender</code></td>
-<td>enum</td>
-<td><code>male</code>, <code>female</code>, <code>others</code></td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>float</td>
-<td>metres, greater than 0</td>
-</tr>
-<tr>
-<td><code>weight</code></td>
-<td>float</td>
-<td>kilograms, greater than 0</td>
-</tr>
-<tr>
-<td><code>bmi</code></td>
-<td>float</td>
-<td>computed</td>
-</tr>
-<tr>
-<td><code>verdict</code></td>
-<td>string</td>
-<td>computed</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-<h2>🚀 Getting Started</h2>
-<pre><code class="language-bash"># 1. Clone and enter the project
-git clone &lt;your-repository-url&gt;
-cd patient-management-website
+    ├── index.html
+    ├── dashboard.html
+    ├── style.css
+    ├── common.js
+    ├── landing.js
+    └── dashboard.js
 
-# 2. Create a virtual environment
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run PatientCare locally.
+
+### 1. Clone the Repository
+
+```bash
+git clone <your-repository-url>
+cd PatientCare
+```
+
+### 2. Create a Virtual Environment
+
+```bash
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+```
 
-# 3. Install dependencies
+Activate the virtual environment.
+
+**macOS / Linux**
+
+```bash
+source venv/bin/activate
+```
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-# 4. Run the server
+### 4. Start the FastAPI Server
+
+```bash
 uvicorn main:app --reload
-</code></pre>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>URL</th>
-<th>What you get</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>http://127.0.0.1:8000/</code></td>
-<td>Redirects to the website</td>
-</tr>
-<tr>
-<td><code>http://127.0.0.1:8000/site/</code></td>
-<td>Landing page</td>
-</tr>
-<tr>
-<td><code>http://127.0.0.1:8000/site/dashboard.html</code></td>
-<td>Dashboard</td>
-</tr>
-<tr>
-<td><code>http://127.0.0.1:8000/docs</code></td>
-<td>Swagger UI</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3>🐳 Docker</h3>
-<pre><code class="language-bash">docker build -t patientcare .
-docker run -p 8000:8000 -v &#34;$(pwd)/patients.json:/app/patients.json&#34; patientcare
-</code></pre>
-<h3>🧪 Example request</h3>
-<pre><code class="language-bash">curl -X POST http://127.0.0.1:8000/create \
-  -H &#34;Content-Type: application/json&#34; \
-  -d &#39;{&#34;id&#34;:&#34;P008&#34;,&#34;name&#34;:&#34;Aarav Shah&#34;,&#34;city&#34;:&#34;Delhi&#34;,&#34;age&#34;:31,&#34;gender&#34;:&#34;male&#34;,&#34;height&#34;:1.78,&#34;weight&#34;:74}&#39;
-</code></pre>
-<hr>
-<h2>📊 Results &amp; Behavior</h2>
-<p>This is an application rather than an ML project, so results are shown as the behavior on the bundled sample data (7 patients in <code>patients.json</code>):</p>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>BMI</th>
-<th>Verdict</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>P001</td>
-<td>Ananya Verma</td>
-<td>33.06</td>
-<td>Obese</td>
-</tr>
-<tr>
-<td>P002</td>
-<td>Ravi Mehta</td>
-<td>27.76</td>
-<td>Overweight</td>
-</tr>
-<tr>
-<td>P003</td>
-<td>Sneha Kulkarni</td>
-<td>17.58</td>
-<td>Underweight</td>
-</tr>
-<tr>
-<td>P004</td>
-<td>Arjun Verma</td>
-<td>27.78</td>
-<td>Overweight</td>
-</tr>
-<tr>
-<td>P005</td>
-<td>Neha Sinha</td>
-<td>31.22</td>
-<td>Obese</td>
-</tr>
-<tr>
-<td>P006</td>
-<td>Himanshu</td>
-<td>16.90</td>
-<td>Underweight</td>
-</tr>
-<tr>
-<td>P007</td>
-<td>Saumya</td>
-<td>20.28</td>
-<td>Normal</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>Dashboard summary:</strong> 7 patients · average BMI <strong>24.9</strong> · 2 Underweight · 1 Normal · 2 Overweight · 2 Obese.</p>
-<blockquote>
-<p>⚠️ In the original <code>patients.json</code>, P004 was stored with the verdict &quot;Normal&quot; although its BMI of 27.78 is Overweight. The dashboard recalculates verdicts from height and weight, so it shows the correct value.</p>
-</blockquote>
-<hr>
-<h2>💡 Key Learnings</h2>
-<ul>
-<li>🧠 Computed fields keep derived data (BMI, verdict) consistent without storing it by hand.</li>
-<li>🛡️ Pydantic models give validation and API documentation from a single definition.</li>
-<li>🔌 A single FastAPI app can serve both the API and a static frontend.</li>
-<li>📂 Resolving file paths from the project location avoids &quot;works on my machine&quot; errors.</li>
-<li>🧩 A graceful demo-mode fallback makes the frontend usable even when the backend is offline.</li>
-</ul>
-<hr>
-<h2>🚀 Future Improvements</h2>
-<ul>
-<li><input disabled="" type="checkbox"> 🔐 Authentication and role-based access</li>
-<li><input disabled="" type="checkbox"> 📄 Pagination and filtering on the API</li>
-<li><input disabled="" type="checkbox"> 🧪 Automated tests and CI</li>
-<li><input disabled="" type="checkbox"> 🧾 Audit log for record changes</li>
-<li><input disabled="" type="checkbox"> 📈 BMI trend charts per patient</li>
-</ul>
-<hr>
-<div align="center">
-<p>⭐ If you found this repository helpful, consider giving it a star!</p>
-<p>📚 Always learning, always building.</p>
-<p><strong>Made with ❤️ by Arpit Kushwaha</strong></p>
-<p>Thanks for visiting!</p>
-</div>
+```
 
-</body></html>
+The API will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+### 5. Explore the API Documentation
+
+FastAPI automatically generates interactive API documentation.
+
+- **Swagger UI:** `http://127.0.0.1:8000/docs`
+- **ReDoc:** `http://127.0.0.1:8000/redoc`
+
+---
+
+## 🔗 API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/health` | Check API health |
+| GET | `/view` | View patient records |
+| GET | `/sort` | Sort patient records |
+| GET | `/patient/{patient_id}` | Retrieve a specific patient |
+| POST | `/create` | Create a patient record |
+| PUT | `/edit/{patient_id}` | Update a patient record |
+| DELETE | `/delete/{patient_id}` | Delete a patient record |
+
+> For available parameters, request schemas, and response details, explore the interactive API documentation at `/docs`.
+
+---
+
+## 🐳 Run with Docker
+
+Build the Docker image:
+
+```bash
+docker build -t patientcare .
+```
+
+Run the container:
+
+```bash
+docker run -p 8000:8000 patientcare
+```
+
+The API will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## 🤖 AI-Assisted Development
+
+AI tools were used to assist with the development of the PatientCare frontend, including parts of the UI design, layout, styling, and JavaScript implementation.
+
+This project provided an opportunity to explore AI-assisted development while learning how a frontend interacts with a FastAPI backend.
+
+It also helped me understand API integration, application structure, data validation, and the process of connecting backend functionality with a user-facing interface.
+
+---
+
+## 📚 Key Learnings
+
+Through this project, I explored:
+
+- Building REST APIs using FastAPI
+- Defining and validating data with Pydantic
+- Organizing a backend using routers, models, and dependencies
+- Implementing CRUD operations
+- Working with JSON-based data persistence
+- Connecting a frontend to backend API endpoints
+- Understanding request and response handling
+- Using Docker to containerize an application
+- Exploring AI-assisted frontend development
+
+---
+
+## 🔮 Future Improvements
+
+- Replace JSON storage with a relational database
+- Add authentication and authorization
+- Improve error handling and API responses
+- Add automated tests
+- Deploy the application online
+- Improve frontend functionality and API integration
+
+---
+
+## ⭐ Thanks for Visiting!
+
+If you found this project interesting, consider giving the repository a star.
+
+**Made with ❤️ by Arpit Kushwaha**
